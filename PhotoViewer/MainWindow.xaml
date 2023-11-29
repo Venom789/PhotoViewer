@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="PhotoViewer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PhotoViewer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="AppTitleBar" Height="30" Grid.Row="1">
+            <TextBlock VerticalAlignment="Center"
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Margin ="20,0"
+                   Text="{x:Bind Title}"
+                   />
+        </Border>
+
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="2">
+            <AppBarButton Icon="Folder" Label="Select Folder" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Edit" Label="ClassifyData" Click="AppBarButton_ClassifyData"/>
+            <AppBarButton Icon="Go" Label="About" Click="AppBarButton_Click_1"/>
+        </CommandBar>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+          VerticalScrollMode="Auto" Grid.Row="3">
+
+            <ScrollViewer.Resources>
+                <!-- The Layout specifications used: -->
+
+                <UniformGridLayout x:Name="UniformGridLayout" MinRowSpacing="8" MinColumnSpacing="8" ItemsJustification="SpaceEvenly"/>
+
+                <!-- The DataTemplate used: CircularTemplate-->
+
+                <DataTemplate x:Key="ImageTemplate" x:DataType="local:ImageInfo">
+                    <Button Click="Button_Click" DataContext="{x:Bind}" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited">
+                        <Grid Width="200" Height="200">
+                            <!-- Set a fixed width and height for the button -->
+                            <Image Source="{x:Bind FullName}" Stretch="UniformToFill" />
+                        </Grid>
+
+                    </Button>
+                </DataTemplate>
+
+            </ScrollViewer.Resources>
+
+            <ItemsRepeater
+           ItemsSource="{x:Bind ImageRepository.Images}"
+           Layout="{StaticResource UniformGridLayout}"
+           ItemTemplate="{StaticResource ImageTemplate}" 
+        />
+
+        </ScrollViewer>
+
+        <StackPanel x:Name="LabelCounts" Orientation="Horizontal" Grid.Row="0" Background="#FF2196F3" HorizontalAlignment="Center"/>
+
+        <InfoBar x:Name="ImageInfoBar"
+        Severity="Informational"
+        Title="Images in our gallery"
+        Grid.Row="4"
+    />
+    </Grid>
+
+    <!--<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="AppTitleBar" Height="30" Grid.Row="1">
+            <TextBlock VerticalAlignment="Center"
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Margin ="20,0"
+                       Text="{x:Bind Title}"
+                       />
+        </Border>
+
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Row="2">
+            <AppBarButton Icon="Folder" Label="Select Folder" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Edit" Label="Edit"/>
+            <AppBarButton Icon="Go" Label="About" Click="AppBarButton_Click_1"/>
+        </CommandBar>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+              VerticalScrollMode="Auto" Grid.Row="3">
+
+            <ScrollViewer.Resources>
+                --><!-- The Layout specifications used: --><!--
+
+                <UniformGridLayout x:Name="UniformGridLayout" MinRowSpacing="8" MinColumnSpacing="8" ItemsJustification="SpaceEvenly"/>
+
+                --><!-- The DataTemplate used: CircularTemplate--><!--
+
+                <DataTemplate x:Key="ImageTemplate" x:DataType="local:ImageInfo">
+                    <Button Click="Button_Click" DataContext="{x:Bind}" PointerEntered="element_PointerEntered" PointerExited="element_PointerExited">
+                        <Grid Width="200" Height="200">
+                            --><!-- Set a fixed width and height for the button --><!--
+                            <Image Source="{x:Bind FullName}" Stretch="UniformToFill" />
+                        </Grid>
+
+                    </Button>
+                </DataTemplate>
+
+            </ScrollViewer.Resources>
+
+
+
+            <ItemsRepeater
+               ItemsSource="{x:Bind ImageRepository.Images}"
+               Layout="{StaticResource UniformGridLayout}"
+               ItemTemplate="{StaticResource ImageTemplate}" 
+            />
+
+        </ScrollViewer>
+        <InfoBar x:Name="ImageInfoBar"
+            
+            Severity="Informational"
+            Title="Images in our gallery"
+            Grid.Row="4"
+        />
+
+
+    </Grid>-->
+</Window>
